@@ -13,7 +13,7 @@ class HouseViewSet(viewsets.ModelViewSet):
     permission_classes = [IsHouseManagerOrNone]
     serializer_class = HouseSerializer
 
-    @action(detail=True, methods=['post'], name='Join')
+    @action(detail=True, methods=['post'], name='Join', permission_classes=[])
     def join(self, request, pk=None):
         try:
             house = self.get_object()
@@ -29,7 +29,7 @@ class HouseViewSet(viewsets.ModelViewSet):
         except Exception as e:
             return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    @action(detail=True, methods=['post'], name='Leave')
+    @action(detail=True, methods=['post'], name='Leave', permission_classes=[])
     def leave(self, request, pk=None):
         try:
             house = self.get_object()
