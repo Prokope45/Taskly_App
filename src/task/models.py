@@ -1,6 +1,5 @@
 from django.db import models
 
-
 NOT_COMPLETE = 'NC'
 COMPLETE = 'C'
 TASK_STATUS_CHOICES = [
