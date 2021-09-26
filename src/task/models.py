@@ -1,4 +1,5 @@
-import uuid, os
+import os
+import uuid
 
 from django.db import models
 from django.utils.deconstruct import deconstructible
@@ -10,6 +11,7 @@ TASK_STATUS_CHOICES = [
     (COMPLETE, 'Complete'),
 ]
 
+
 @deconstructible
 class GenerateAttachmentFile(object):
 
@@ -17,17 +19,18 @@ class GenerateAttachmentFile(object):
         pass
 
     def __call__(self, instance, filename):
-        ext = filename.split('.') [-1]
+        ext = filename.split('.')[-1]
         path = f'media/task/{instance.task.id}/attachments'
         name = f'{instance.id}.{ext}'
         return os.path.join(path, name)
+
 
 attachment_file_path = GenerateAttachmentFile()
 
 
 class TaskList(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
-    completed_on = models.DateTimeField(null=True, blank=False)
+    completed_on = models.DateTimeField(null=True, blank=True)
     created_by = models.ForeignKey('users.Profile', null=True, blank=True,
                                    on_delete=models.SET_NULL, related_name='lists')
     house = models.ForeignKey('house.House', on_delete=models.CASCADE, related_name='lists')
@@ -45,7 +48,7 @@ class TaskList(models.Model):
 
 class Task(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
-    completed_on = models.DateTimeField(null=True, blank=False)
+    completed_on = models.DateTimeField(null=True, blank=True)
     created_by = models.ForeignKey('users.Profile', null=True, blank=True,
                                    on_delete=models.SET_NULL, related_name='created_tasks')
     completed_by = models.ForeignKey('users.Profile', null=True, blank=True,
