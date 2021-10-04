@@ -8,8 +8,9 @@ class TaskListViewSet(mixins.CreateModelMixin,
                       mixins.RetrieveModelMixin,
                       mixins.UpdateModelMixin,
                       mixins.DestroyModelMixin,
+                      mixins.ListModelMixin,
                       viewsets.GenericViewSet
                       ):
     permission_classes = [IsAllowedEditTaskListElseNone]
-    queryset =  TaskList.objects.all()
+    queryset = TaskList.objects.all()
     serializer_class = TaskListSerializer
