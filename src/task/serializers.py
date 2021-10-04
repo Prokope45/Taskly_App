@@ -1,11 +1,9 @@
 from rest_framework import serializers
-
 from .models import Task, TaskList, Attachment
-
 from house.models import House
 
 
-class TaskListSerializers(serializers.ModelSerializer):
+class TaskListSerializer(serializers.ModelSerializer):
 
     house = serializers.HyperlinkedRelatedField(queryset=House.objects.all(), many=False, view_name='house-detail')
     created_by = serializers.HyperlinkedRelatedField(read_only=True, many=False, view_name='profile-detail')
