@@ -34,10 +34,10 @@ class IsAllowedToEditTaskElseNone(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
 
-        return request.user.profile.house is obj.task_list.house
+        return request.user.profile.house == obj.task_list.house
 
 
-class IsAllowedToEditAttchmentElseNone(permissions.BasePermission):
+class IsAllowedToEditAttachmentElseNone(permissions.BasePermission):
 
     def has_permission(self, request, view):
         if not request.user.is_anonymous:
@@ -47,4 +47,4 @@ class IsAllowedToEditAttchmentElseNone(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
 
-        return request.user.profile.house is obj.task.task_list.house
+        return request.user.profile.house == obj.task.task_list.house
