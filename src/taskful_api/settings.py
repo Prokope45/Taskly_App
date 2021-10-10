@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_filters',
+    'background_task',
     'oauth2_provider',
     'social_django',
     'rest_framework_social_oauth2',
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'users',
     'house',
     'task',
+    'background_jobs',
 ]
 
 MIDDLEWARE = [
