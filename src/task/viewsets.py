@@ -1,7 +1,10 @@
 from django.utils import timezone
+from django_filters.rest_framework import DjangoFilterBackend
+
 from rest_framework import viewsets, mixins, response
 from rest_framework import status as response_status
 from rest_framework.decorators import action
+
 from .serializers import TaskListSerializer, TaskSerializer, AttachmentSerializer
 from .models import COMPLETE, NOT_COMPLETE, Task, TaskList, Attachment
 from .permissions import IsAllowedEditTaskListElseNone, IsAllowedToEditTaskElseNone, IsAllowedToEditAttachmentElseNone
@@ -22,6 +25,8 @@ class TaskViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAllowedToEditTaskElseNone]
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['status', ]
 
     def get_queryset(self):
         queryset = super(TaskViewSet, self).get_queryset()
