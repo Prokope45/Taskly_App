@@ -8,6 +8,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 from decouple import config
 import os
+from google.oauth2 import service_account
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -145,8 +146,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+# MEDIA_URL = '/media/'
+
+DEFAULT_FILE_STORAGE = config('DEFAULT_FILE_STORAGE')
+GS_BUCKET_NAME = config('GS_BUCKET_NAME')
+GS_FILE_OVERWRITE = config('GS_FILE_OVERWRITE')
+GS_CREDENTIALS = service_account.Credentials.from_service_account_file('django-taskly-api-8caad56a8871.json')
 
 # Auto-create primary keys
 DEFAULT_AUTO_FIELD='django.db.models.AutoField'
